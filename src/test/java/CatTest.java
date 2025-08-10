@@ -26,13 +26,22 @@ public class CatTest {
     }
 
     @Test
-    public void testGetFood() throws Exception {
+    public void testGetFoodReturnsCorrectList() throws Exception {
         List<String> meatFood = Arrays.asList("Животные", "Птицы", "Рыба");
-        when(felineMock.eatMeat()).thenReturn(meatFood); // настройка поведения мока
+        when(felineMock.eatMeat()).thenReturn(meatFood);
 
         Cat cat = new Cat(felineMock);
         assertEquals(meatFood, cat.getFood());
-        verify(felineMock, times(1)).eatMeat(); // проверка вызова
+    }
+
+    @Test
+    public void testGetFoodCallsEatMeatOnce() throws Exception {
+        when(felineMock.eatMeat()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
+
+        Cat cat = new Cat(felineMock);
+        cat.getFood();
+
+        verify(felineMock, times(1)).eatMeat();
     }
 }
 

@@ -38,12 +38,21 @@ public class AlexTest {
     }
 
     @Test
-    public void testGetFood() throws Exception {
+    public void testGetFoodReturnsExpectedList() throws Exception {
         List<String> meatFood = Arrays.asList("Животные", "Птицы", "Рыба");
         when(felineMock.getFood("Хищник")).thenReturn(meatFood);
 
         Alex alex = new Alex(felineMock);
         assertEquals(meatFood, alex.getFood());
+    }
+
+    @Test
+    public void testGetFoodCallsFelineGetFoodOnce() throws Exception {
+        List<String> meatFood = Arrays.asList("Животные", "Птицы", "Рыба");
+        when(felineMock.getFood("Хищник")).thenReturn(meatFood);
+
+        Alex alex = new Alex(felineMock);
+        alex.getFood();
         verify(felineMock, times(1)).getFood("Хищник");
     }
 }

@@ -29,10 +29,16 @@ public class AnimalTest {
     }
 
     @Test
-    public void testGetFamily() {
+    public void testGetFamilyContainsKoshachie() {
         Animal animal = new Animal();
         String family = animal.getFamily();
         assertTrue(family.contains("кошачьи"));
+    }
+
+    @Test
+    public void testGetFamilyStartsWithDescription() {
+        Animal animal = new Animal();
+        String family = animal.getFamily();
         assertTrue(family.startsWith("Существует несколько семейств"));
     }
 }
